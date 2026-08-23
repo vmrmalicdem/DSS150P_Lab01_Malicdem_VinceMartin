@@ -1,0 +1,28 @@
+# Data Contract — pick ONE source (e.g. customers.csv) and describe it here.
+
+source_name: customers.csv
+owner: "<your name>"
+description: "<one sentence describing what this dataset represents>"
+
+schema:
+  - name: "<column_name>"
+    type: "<string|integer|float|date|boolean>"
+    nullable: true
+    description: "<what this field means>"
+  - name: "<column_name>"
+    type: "<...>"
+    nullable: false
+    description: "<...>"
+
+primary_key: "<column_name or combination>"
+
+update_frequency: "<e.g. daily batch, real-time, ad-hoc>"
+
+quality_expectations:
+  - "<e.g. no nulls in customer_id>"
+  - "<e.g. email must match a valid email pattern>"
+
+consumers:
+  - "<who/what downstream depends on this source>"
+
+change_management: "<how schema changes should be communicated, e.g. versioned schema + changelog>"
