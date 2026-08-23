@@ -18,11 +18,11 @@ schema:
   - name: "email"
     type: "string"
     nullable: true
-    description: "Customer's email address; may be missing"
+    description: "Customer's email address, may be missing"
   - name: "city"
     type: "string"
     nullable: true
-    description: "Customer's city; may be missing"
+    description: "Customer's city, may be missing"
   - name: "signup_date"
     type: "date"
     nullable: false
@@ -30,16 +30,18 @@ schema:
   - name: "customer_segment"
     type: "string"
     nullable: false
-    description: "Business segment classification (e.g. Retail, Professional, SME, Student)"
+    description: "Business segment classification (Retail, Professional, SME, Student)"
 
 primary_key: "customer_id"
-update_frequency: "Batch export, likely daily — underlying signups happen continuously but this file is refreshed on a schedule"
+update_frequency: "Batch export, likely daily. Signups happen continuously but this file is refreshed on a schedule"
+
 quality_expectations:
   - "customer_id should be unique across all rows"
   - "email should not be null for more than a small percentage of records"
   - "signup_date should be a valid, parseable date"
-  consumers:
-  - "Marketing team (for segmentation and outreach)"
-  - "Analytics team (for customer reporting)"
+
+consumers:
+  - "Marketing team, for segmentation and outreach"
+  - "Analytics team, for customer reporting"
 
 change_management: "Schema changes should be communicated via a changelog or versioned schema file before being deployed to production"
