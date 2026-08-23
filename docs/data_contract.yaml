@@ -1,28 +1,45 @@
-# Data Contract — pick ONE source (e.g. customers.csv) and describe it here.
-
 source_name: customers.csv
-owner: "<your name>"
-description: "<one sentence describing what this dataset represents>"
+owner: "Vince Martin Malicdem"
+description: "Customer records collected via signup form, including contact info, location, and segment classification."
 
 schema:
-  - name: "<column_name>"
-    type: "<string|integer|float|date|boolean>"
-    nullable: true
-    description: "<what this field means>"
-  - name: "<column_name>"
-    type: "<...>"
+  - name: "customer_id"
+    type: "string"
     nullable: false
-    description: "<...>"
+    description: "Unique identifier for each customer"
+  - name: "first_name"
+    type: "string"
+    nullable: false
+    description: "Customer's first name"
+  - name: "last_name"
+    type: "string"
+    nullable: false
+    description: "Customer's last name"
+  - name: "email"
+    type: "string"
+    nullable: true
+    description: "Customer's email address; may be missing"
+  - name: "city"
+    type: "string"
+    nullable: true
+    description: "Customer's city; may be missing"
+  - name: "signup_date"
+    type: "date"
+    nullable: false
+    description: "Date the customer signed up"
+  - name: "customer_segment"
+    type: "string"
+    nullable: false
+    description: "Business segment classification (e.g. Retail, Professional, SME, Student)"
 
-primary_key: "<column_name or combination>"
-
-update_frequency: "<e.g. daily batch, real-time, ad-hoc>"
-
+primary_key: "customer_id"
+update_frequency: "Batch export, likely daily — underlying signups happen continuously but this file is refreshed on a schedule"
 quality_expectations:
-  - "<e.g. no nulls in customer_id>"
-  - "<e.g. email must match a valid email pattern>"
+  - "customer_id should be unique across all rows"
+  - "email should not be null for more than a small percentage of records"
+  - "signup_date should be a valid, parseable date"
+  consumers:
+  - "Marketing team (for segmentation and outreach)"
+  - "Analytics team (for customer reporting)"
 
-consumers:
-  - "<who/what downstream depends on this source>"
-
-change_management: "<how schema changes should be communicated, e.g. versioned schema + changelog>"
+change_management: "Schema changes should be communicated via a changelog or versioned schema file before being deployed to production"
