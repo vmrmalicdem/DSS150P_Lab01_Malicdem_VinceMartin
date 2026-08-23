@@ -1,16 +1,12 @@
--- Basic relational schema for the source you selected in docs/data_contract.yaml
--- Adjust column names/types to match what you found in Task 2.2 profiling.
+DROP TABLE IF EXISTS support_tickets;
 
-CREATE TABLE IF NOT EXISTS customers (
-    customer_id     VARCHAR PRIMARY KEY,
-    -- add remaining columns based on your profiling results
-    created_at      TIMESTAMP
+CREATE TABLE support_tickets (
+    ticket_id       INTEGER PRIMARY KEY,
+    customer_id     VARCHAR NOT NULL,
+    category        VARCHAR NOT NULL,
+    priority        VARCHAR NOT NULL,
+    assigned_agent  VARCHAR,
+    opened_at       TIMESTAMP NOT NULL,
+    resolved_at     TIMESTAMP,
+    status          VARCHAR NOT NULL
 );
-
--- Example of a second table if you want to show a relationship (optional)
--- CREATE TABLE IF NOT EXISTS orders (
---     order_id     VARCHAR PRIMARY KEY,
---     customer_id  VARCHAR REFERENCES customers(customer_id),
---     order_date   TIMESTAMP,
---     amount       NUMERIC
--- );
