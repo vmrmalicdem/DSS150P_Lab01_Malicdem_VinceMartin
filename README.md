@@ -5,7 +5,7 @@
 **Date Started:** August 23, 2026
 
 ## REST API endpoint (from LMS)
-<`https://jsonplaceholder.typicode.com/posts`>
+`https://jsonplaceholder.typicode.com/posts`
 
 ## How to run this project
 
