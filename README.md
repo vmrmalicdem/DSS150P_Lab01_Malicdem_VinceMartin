@@ -21,4 +21,13 @@
 
 ## Folder structure
 
+## AI Tool Usage Disclosure
+
+**Tool used:** Claude (Anthropic)
+
+**What I asked it to help with:**
+- Setting up the initial project folder structure and starter files (docker-compose.yml, requirements.txt, .gitignore, script skeletons for verify_environment.py, profile_sources.py, and inspect_api.py)
+- Walking through environment setup step by step, including troubleshooting a port 5432 conflict between a locally-installed PostgreSQL service and my Docker container
+- Fixing a bug in profile_sources.py where the nested shipping object in orders.json caused a TypeError during duplicate-checking
+
 See lab guide Section 3 for the required structure.
