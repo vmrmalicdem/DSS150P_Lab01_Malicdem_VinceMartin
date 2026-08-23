@@ -1,11 +1,11 @@
 # DSS150P Lab 01 — Local Data Engineering Workspace
 
-**Student Name:** <your name>
-**Section:** <your section>
-**Date Started:** <date>
+**Student Name:** Malicdem, Vince Martin R.
+**Section:** DSS150P - CM17
+**Date Started:** August 23, 2026
 
 ## REST API endpoint (from LMS)
-`<PASTE THE INSTRUCTOR-PROVIDED API URL HERE>`
+<`https://jsonplaceholder.typicode.com/posts`>
 
 ## How to run this project
 
