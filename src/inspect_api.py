@@ -12,7 +12,7 @@ from pathlib import Path
 
 import requests
 
-API_URL = "<API_URL_FROM_LMS>"  # <-- replace with the real endpoint
+API_URL = "https://jsonplaceholder.typicode.com/posts"
 TIMEOUT_SECONDS = 20
 OUTPUT_PATH = Path("data/raw/api_snapshot.json")
 

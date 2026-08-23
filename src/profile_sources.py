@@ -73,7 +73,13 @@ def profile_dataframe(name: str, df: pd.DataFrame, file_path: Path, report_lines
     for col, n in nulls.items():
         report_lines.append(f"  {col}: {n}")
 
-    dup_count = df.duplicated().sum()
+    try:
+        dup_count = df.duplicated().sum()
+    except TypeError:
+        # Some columns contain unhashable types (e.g. nested dicts/lists from
+        # JSON sources like a nested "shipping" object). Fall back to comparing
+        # string representations of each row instead.
+        dup_count = df.astype(str).duplicated().sum()
     report_lines.append(f"\nFully duplicated rows: {dup_count}")
 
     report_lines.append("\n--- Distinct value counts ---")
