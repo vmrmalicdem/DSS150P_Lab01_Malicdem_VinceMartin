@@ -1,12 +1,14 @@
-DROP TABLE IF EXISTS support_tickets;
+CREATE SCHEMA IF NOT EXISTS lab;
 
-CREATE TABLE support_tickets (
-    ticket_id       INTEGER PRIMARY KEY,
-    customer_id     VARCHAR NOT NULL,
-    category        VARCHAR NOT NULL,
-    priority        VARCHAR NOT NULL,
-    assigned_agent  VARCHAR,
-    opened_at       TIMESTAMP NOT NULL,
-    resolved_at     TIMESTAMP,
-    status          VARCHAR NOT NULL
+CREATE TABLE IF NOT EXISTS lab.customers (
+    customer_id      VARCHAR PRIMARY KEY,
+    first_name       TEXT NOT NULL,
+    last_name        TEXT NOT NULL,
+    email            TEXT,
+    city             TEXT,
+    signup_date      DATE,
+    customer_segment TEXT NOT NULL,
+    CONSTRAINT ck_customer_segment_valid CHECK (
+        customer_segment IN ('Retail', 'Professional', 'SME', 'Student')
+    )
 );

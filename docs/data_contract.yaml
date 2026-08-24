@@ -1,3 +1,6 @@
+# Source chosen: customers.csv
+# Reason: It has a clear primary key (customer_id), a well-defined flat structure, and directly observable data-quality issues (duplicates, missing emails) that make it a good candidate for demonstrating explicit contract rules.
+
 source_name: customers.csv
 owner: "Vince Martin Malicdem"
 description: "Customer records collected via signup form, including contact info, location, and segment classification."

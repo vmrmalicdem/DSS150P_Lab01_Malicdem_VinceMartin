@@ -1,0 +1,12 @@
+﻿[?1049h[22;0;0t[24;1H[?1h=
+   column_name    |     data_type     | is_nullable 
+------------------+-------------------+-------------
+ customer_id      | character varying | NO
+ first_name       | text              | NO
+ last_name        | text              | NO
+ email            | text              | YES
+ city             | text              | YES
+ signup_date      | date              | YES
+ customer_segment | text              | NO
+(7 rows)
+
