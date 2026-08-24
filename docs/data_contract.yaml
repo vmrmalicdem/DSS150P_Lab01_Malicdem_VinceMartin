@@ -1,50 +1,55 @@
 # Source chosen: customers.csv
-# Reason: It has a clear primary key (customer_id), a well-defined flat structure, and directly observable data-quality issues (duplicates, missing emails) that make it a good candidate for demonstrating explicit contract rules.
+# Reason: It has a clear primary key (customer_id), a well-defined flat structure, and directly
+# observable data-quality issues (duplicates, missing emails) found during profiling, making it
+# a good candidate for demonstrating explicit, evidence-based contract rules.
 
-source_name: customers.csv
-owner: "Vince Martin Malicdem"
-description: "Customer records collected via signup form, including contact info, location, and segment classification."
+dataset_name: customers
+version: 1.0
+owner: "unknown - requires source owner confirmation"
+source_type: file
+source_format: csv
+acquisition_method: "Direct file read via pandas.read_csv, assumed to be exported/dropped into a shared location"
+expected_update_pattern: "batch - likely daily; signups happen continuously but this file is a periodic export"
+primary_key: customer_id
 
 schema:
-  - name: "customer_id"
-    type: "string"
+  - name: customer_id
+    type: string
     nullable: false
     description: "Unique identifier for each customer"
-  - name: "first_name"
-    type: "string"
+  - name: first_name
+    type: string
     nullable: false
     description: "Customer's first name"
-  - name: "last_name"
-    type: "string"
+  - name: last_name
+    type: string
     nullable: false
     description: "Customer's last name"
-  - name: "email"
-    type: "string"
+  - name: email
+    type: string
     nullable: true
-    description: "Customer's email address, may be missing"
-  - name: "city"
-    type: "string"
+    description: "Customer's email address; 3 nulls observed during profiling"
+  - name: city
+    type: string
     nullable: true
-    description: "Customer's city, may be missing"
-  - name: "signup_date"
-    type: "date"
-    nullable: false
+    description: "Customer's city; 2 nulls observed during profiling"
+  - name: signup_date
+    type: date
+    nullable: true
     description: "Date the customer signed up"
-  - name: "customer_segment"
-    type: "string"
+  - name: customer_segment
+    type: string
     nullable: false
-    description: "Business segment classification (Retail, Professional, SME, Student)"
+    description: "Business segment classification; observed values are Retail, Professional, SME, Student"
 
-primary_key: "customer_id"
-update_frequency: "Batch export, likely daily. Signups happen continuously but this file is refreshed on a schedule"
+quality_rules:
+  - "customer_id must not be null and must be unique"
+  - "customer_segment must be one of: Retail, Professional, SME, Student"
+  - "email, when present, must match a valid email format (user@domain)"
+  - "the dataset must contain no fully duplicated rows (2 were found during profiling and should be removed before loading)"
 
-quality_expectations:
-  - "customer_id should be unique across all rows"
-  - "email should not be null for more than a small percentage of records"
-  - "signup_date should be a valid, parseable date"
-
-consumers:
-  - "Marketing team, for segmentation and outreach"
-  - "Analytics team, for customer reporting"
-
-change_management: "Schema changes should be communicated via a changelog or versioned schema file before being deployed to production"
+freshness_expectation: "unknown - requires confirmation from source owner on export schedule"
+duplicate_policy: deduplicate
+schema_evolution_policy: "New columns or new customer_segment values should be reviewed and the schema/CHECK constraint updated before being loaded into lab.customers; unexpected columns should be flagged, not silently dropped"
+consumer: "Marketing team (segmentation and outreach), Analytics team (customer reporting)"
+notes: "2 duplicate rows and missing values in email (3) and city (2) were found during profiling (Task 2.2). Duplicate policy and email format rule are informed directly by this evidence."
