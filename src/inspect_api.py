@@ -1,11 +1,3 @@
-"""
-Task 2.3 - Retrieve and inspect the instructor-provided REST API.
-
-Fill in API_URL below with the URL posted on the LMS, then run this script.
-It saves the raw JSON to data/raw/api_snapshot.json and prints the
-retrieval timestamp you should paste into docs/source_inventory.md.
-"""
-
 import json
 from datetime import datetime, timezone
 from pathlib import Path

@@ -1,10 +1,3 @@
-"""
-Task 1.3 - Verify the local environment by connecting to PostgreSQL
-and confirming basic queries run successfully.
-
-Run this AFTER `docker compose up -d` has started the postgres container.
-"""
-
 from sqlalchemy import create_engine, text
 
 CONNECTION_STRING = "postgresql+psycopg2://dss150p:dss150p_lab@localhost:5433/dss150p_lab"

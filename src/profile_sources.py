@@ -1,23 +1,3 @@
-"""
-Task 2.2 - Profile customers.csv, orders.json, and products.parquet.
-
-Prints, for each source:
-- file name and size
-- row/column counts
-- column names in original order
-- inferred dtype per column
-- null counts per column
-- duplicate row count
-- distinct value counts per column (skipped for unhashable/list-like columns)
-- first five records
-- min/max for numeric columns
-- earliest/latest for date-like columns (best-effort parse)
-
-Also writes a combined text report to data/evidence/profile_report.txt
-so you have something to paste into docs/source_profile.md and to keep
-as evidence.
-"""
-
 from pathlib import Path
 import sys
 import pandas as pd
@@ -76,9 +56,6 @@ def profile_dataframe(name: str, df: pd.DataFrame, file_path: Path, report_lines
     try:
         dup_count = df.duplicated().sum()
     except TypeError:
-        # Some columns contain unhashable types (e.g. nested dicts/lists from
-        # JSON sources like a nested "shipping" object). Fall back to comparing
-        # string representations of each row instead.
         dup_count = df.astype(str).duplicated().sum()
     report_lines.append(f"\nFully duplicated rows: {dup_count}")
 
